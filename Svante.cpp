@@ -41,23 +41,29 @@ int Svante::getTrim(){
 }
 
 SpeedPair Svante::procSpeed(int speedRaw){
+	SpeedPair res;
+	if(speedRaw==0){
+		res.speed1=0;
+		res.speed2=0;
+		return res;
+	}
 	int sign=speedRaw/abs(speedRaw);
 	
 	#ifdef DEBUG
-	int speedTest=map(getTrim(),0,1023,0,255);
+	int speedTest=constrain(map(getTrim(),0,1023,0,255),0,255);
 	Serial.println(speedTest);
 	int speed=map(speedRaw,0,100,speedTest,255);
 	#else 
-	int speed=map(speedRaw,0,100,MIN_MOTOR_VAL,255);
+	int speed=constrain(map(speedRaw,0,100,MIN_MOTOR_VAL,255),0,255);
 	#endif
 	
-	SpeedPair res;
+	Serial.println(speed);
 	if(sign>0){
 		res.speed1=speed;
 		res.speed2=0;
 	}else{
 		res.speed1=0;
-		res.speed2=speed;
+		res.speed2=-speed;
 	}
 	return res;
 }
