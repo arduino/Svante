@@ -1,18 +1,15 @@
 #include <Svante.h>
 
-Svante me;
-
 void setup(){
-  Serial.begin(9600);
-  me.init();
+  robot.init();
 }
 void loop(){
-  me.go(100,100);
+  robot.go(100,100);
   delay(1000);
-  me.stop();
+  robot.stop();
   delay(1000);
-  me.go(-100,-100);
+  robot.go(-100,-100);
   delay(1000);
-  me.stop();
+  robot.stop();
   delay(1000);
 }

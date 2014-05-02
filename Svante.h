@@ -15,8 +15,10 @@
 
 
 #define MIN_MOTOR_VAL 70
+#define MOTOR_CALIB_MULTI 1000.0
 
-//#define DEBUG
+#define DEBUG
+//#define DEBUG_SPEED
 
 struct SpeedPair{
 	int speed1;
@@ -26,15 +28,21 @@ struct SpeedPair{
 class Svante{
 	public:
 		Svante();
-		void init();
+		void begin(int motorsDiff=0);
+		void setMotorsDiff(int diff);
+
 		void go(int speedLeft,int speedRight);
 		void stop();
+		
 	private:
+		float leftMotorMulti,rightMotorMulti;
 		void initMotors();
 		void motorsWrite(int speedL1,int speedL2, int speedR1, int speedR2);
 		int getTrim();
-		SpeedPair procSpeed(int speedRaw);
+		SpeedPair procSpeed(int speedRaw,float motorPow);
 
 };
+
+extern Svante robot;
 
 #endif

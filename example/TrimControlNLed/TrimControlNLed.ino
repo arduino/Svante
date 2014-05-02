@@ -1,11 +1,10 @@
 #include <Svante.h>
 
-Svante me;
 bool ledState=false;
 
 void setup(){
   Serial.begin(9600);
-  me.init();
+  robot.init();
   pinMode(IR_3,OUTPUT);
 }
 void loop(){
@@ -14,6 +13,6 @@ void loop(){
   int trimVal=analogRead(TRIM);
   Serial.println(trimVal);
   int sped=map(trimVal,0,1023,0,100);
-  me.go(sped,sped);
+  robot.go(sped,sped);
  delay(100);
 }

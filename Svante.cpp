@@ -5,14 +5,22 @@ Svante::Svante(){
 
 }
 
-void Svante::init(){
+void Svante::begin(int motorsDiff){
 	initMotors();
+	setMotorsDiff(motorsDiff);
 }
 
 void Svante::go(int speedLeft,int speedRight){
 	SpeedPair sl,sr;
-	sl=procSpeed(speedLeft);
-	sr=procSpeed(speedRight);
+	#ifdef DEBUG
+	Serial.println("left");
+	#endif
+	sl=procSpeed(speedLeft,leftMotorMulti);
+	#ifdef DEBUG
+	Serial.println("right");
+	#endif
+
+	sr=procSpeed(speedRight,rightMotorMulti);
 	motorsWrite(sl.speed1,sl.speed2,sr.speed1,sr.speed2);
 }
 
@@ -29,6 +37,17 @@ void Svante::initMotors(){
 
 }
 
+void Svante::setMotorsDiff(int diff){
+	diff=constrain(diff,-100,100);
+	if(diff>0){
+		leftMotorMulti=1;
+		rightMotorMulti=1-diff/MOTOR_CALIB_MULTI;
+	}else{
+		leftMotorMulti=1+diff/MOTOR_CALIB_MULTI;
+		rightMotorMulti=1;
+	}
+}
+
 void Svante::motorsWrite(int speedL1,int speedL2, int speedR1, int speedR2){
 	analogWrite(MOTOR_L1,speedL1);
 	analogWrite(MOTOR_L2,speedL2);
@@ -40,16 +59,19 @@ int Svante::getTrim(){
 	return analogRead(TRIM);
 }
 
-SpeedPair Svante::procSpeed(int speedRaw){
+SpeedPair Svante::procSpeed(int speedRaw,float motorMulti){
 	SpeedPair res;
+	speedRaw*=motorMulti;
+	
 	if(speedRaw==0){
 		res.speed1=0;
 		res.speed2=0;
 		return res;
 	}
 	int sign=speedRaw/abs(speedRaw);
+	speedRaw=abs(speedRaw);
 	
-	#ifdef DEBUG
+	#ifdef DEBUG_SPEED
 	int speedTest=constrain(map(getTrim(),0,1023,0,255),0,255);
 	Serial.println(speedTest);
 	int speed=map(speedRaw,0,100,speedTest,255);
@@ -57,13 +79,19 @@ SpeedPair Svante::procSpeed(int speedRaw){
 	int speed=constrain(map(speedRaw,0,100,MIN_MOTOR_VAL,255),0,255);
 	#endif
 	
-	Serial.println(speed);
 	if(sign>0){
 		res.speed1=speed;
 		res.speed2=0;
 	}else{
 		res.speed1=0;
-		res.speed2=-speed;
+		res.speed2=speed;
 	}
+	#ifdef DEBUG
+	Serial.print(res.speed1);
+	Serial.print(" ");
+	Serial.println(res.speed2);
+	#endif
 	return res;
 }
+
+Svante robot=Svante();
