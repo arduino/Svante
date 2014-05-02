@@ -12,7 +12,19 @@
 #define IR_2 A1
 #define IR_3 A0
 
-
+#define D0 15
+#define D1 16
+#define D2 14
+#define D3 13
+#define D4 12
+#define D5 11
+#define D6 8
+#define D7 7
+#define D8 4
+#define D9 3
+#define D10 2
+#define D11 0
+#define D12 1
 
 #define MIN_MOTOR_VAL 70
 
