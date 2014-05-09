@@ -13,11 +13,11 @@ void Svante::begin(int motorsDiff){
 void Svante::go(int speedLeft,int speedRight){
 	SpeedPair sl,sr;
 	#ifdef DEBUG
-	Serial.println("left");
+	Serial.print("left ");
 	#endif
 	sl=procSpeed(speedLeft,leftMotorMulti);
 	#ifdef DEBUG
-	Serial.println("right");
+	Serial.print("right ");
 	#endif
 
 	sr=procSpeed(speedRight,rightMotorMulti);
@@ -92,6 +92,23 @@ SpeedPair Svante::procSpeed(int speedRaw,float motorMulti){
 	Serial.println(res.speed2);
 	#endif
 	return res;
+}
+int Svante::getIRArray(int pos){
+	//possible parameters: IR_1, IR_2, IR_3
+	int IRPin;
+	switch(pos){
+		case 0:
+			IRPin=IR_1;
+			break;
+		case 1:
+			IRPin=IR_2;
+			break;
+		case 2:
+			IRPin=IR_3;
+			break;
+	}
+
+	return analogRead(IRPin);
 }
 
 Svante robot=Svante();
