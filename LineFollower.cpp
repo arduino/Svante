@@ -40,8 +40,8 @@ void LineFollower::lineFollowConfig(int KP,int KD, int intergrationTime, int rob
 
 void LineFollower::startLineFollow(){
 	int lastError=getLineFollowError();
-	int resLimit=500*KP/10.0;
-	int speedFactor=robotSpeed*0.5;
+	int resLimit=500;//*KP/100.0;
+	int speedFactor=100;//robotSpeed*0.5;
 	while(true){
 		int error=getLineFollowError();
 		
@@ -49,17 +49,30 @@ void LineFollower::startLineFollow(){
 		if(abs(error)<10){
 			Serial.println("stop");
 		}*/
+		
 		/*
 		Serial.print("error: ");
 		Serial.println(error);
 		*/
-		int result=error/10.0*KP+(error-lastError)*KD;
+		int result=error/100.0*KP+(error-lastError)*KD;
+		
+
 		result=map(result,-resLimit,resLimit,-speedFactor,speedFactor);
-		result=constrain(result,-100,100);
-		int speedL=robotSpeed-result;
-		int speedR=robotSpeed+result;
+		//result=constrain(result,-100,100);
+		/*
+		Serial.print("result: ");
+		Serial.println(result);
+		*/
+
+
+		int speedL=constrain(robotSpeed-result,-100,100);
+		int speedR=constrain(robotSpeed+result,-100,100);
+		/*
+		Serial.print(speedL);
+		Serial.print("   ");
+		Serial.println(speedR);
+		*/
 		go(speedL,speedR);
-		//Serial.println(result);
 		
 		lastError=error;
 		delay(integrationTime);
@@ -72,6 +85,7 @@ int LineFollower::getLineFollowError(){
 		v[i]=map(getIRArray(i),IRArray_Min[i],IRArray_Max[i],0,255);
 	}
 	int error=v[2]-v[0];
+	
 	if(error>0)
 		error=error+v[1];
 	else
