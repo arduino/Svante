@@ -16,6 +16,21 @@
 
 #define EEPROM_MOTORS_CALIB 10
 
+#define DP0 1
+#define DP1 0
+#define DP2 2
+#define DP3 3
+#define DP4 4
+#define DP5 7
+#define DP6 8
+#define DP7 11
+#define DP8 12
+#define DP9 13
+#define DP10 14
+#define DP11 16
+#define DP12 15
+
+
 #define MIN_MOTOR_VAL 70
 #define MOTOR_CALIB_MULTI 1000.0
 
