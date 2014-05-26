@@ -1,10 +1,23 @@
 #include <Arduino.h>
+#include <EEPROM.h>
 #include "Svante.h"
 
 Svante::Svante(){
 
 }
 
+void Svante::begin(){
+	initMotors();
+	int motorCalibEEP=EEPROM.read(EEPROM_MOTORS_CALIB)-100;
+	#ifdef DEBUG
+	Serial.print("MotorCalib from EEPROM: ");
+	Serial.println(motorCalibEEP);
+	#endif
+	if(!(motorCalibEEP<=100 && motorCalibEEP>=-100)){
+		motorCalibEEP=0;
+	}
+	setMotorsDiff(motorCalibEEP);
+}
 void Svante::begin(int motorsDiff){
 	initMotors();
 	setMotorsDiff(motorsDiff);

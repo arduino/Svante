@@ -14,7 +14,7 @@
 #define IR_2 A1
 #define IR_3 A0
 
-
+#define EEPROM_MOTORS_CALIB 10
 
 #define MIN_MOTOR_VAL 70
 #define MOTOR_CALIB_MULTI 1000.0
@@ -30,7 +30,8 @@ struct SpeedPair{
 class Svante : public LineFollower{
 	public:
 		Svante();
-		void begin(int motorsDiff=0);
+		void begin();
+		void begin(int motorsDiff);
 		void setMotorsDiff(int diff);
 
 		void go(int speedLeft,int speedRight);
