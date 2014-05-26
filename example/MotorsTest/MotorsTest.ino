@@ -1,14 +1,14 @@
 #include <Svante.h>
-
+#include <EEPROM.h>
 /*
-*	MotorsTest
-*	Test if the motors are moving, in the right
-*	direction.
+*  MotorsTest
+*  Test if the motors are moving, in the right
+*  direction.
 *
 */
 
 void setup(){
-  robot.init();
+  robot.begin();
 }
 void loop(){
   //Forward

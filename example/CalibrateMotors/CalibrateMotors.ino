@@ -3,7 +3,37 @@
 #include <IRremoteTools.h>
 #include <EEPROM.h>
 
-const int RECV_PIN = 13;
+/*
+*
+*  Calibrate Motors
+*  Though all manufactured from
+*  factories, no two motors are exactly
+*  the same. Without calibration, your 
+*  robot can go in circles.
+*  This sketch helps calibrate the motors
+*  of your robot. You'll need an IR
+*  receiver, a remote controller to run
+*  it.
+*  Connect the 3 pins of IR receiver to 
+*  DP9, 5v, GND respectively.
+*  After uploading, you can use the remote
+*  control and on-board trim to calibrate
+*  the robot. Draw a straight line on a 
+*  flat surface, put the robot on the line,
+*  see if it's going in a straight line.
+*  Use the trim to adjust difference 
+*  between the motors. Use "+" and "-" on
+*  the remote control to adjust speed.
+*  When the robot is going staight, keep 
+*  the trim in its position, and press the
+*  middle button on remote control. The 3
+*  LEDs in the front part of the robot will
+*  blink, indicating the calibration is 
+*  finished.
+*
+*/
+
+const int RECV_PIN = DP9;
 int motorsSpeed=100;
 
 void setup(){

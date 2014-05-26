@@ -1,10 +1,11 @@
 #include <Svante.h>
+#include <EEPROM.h>
 /*
-*	Trim Controlled Speed, Plus A Blinking LED
-*	This example is made for testing motor powering 
-*	circuit. The on board trim changes speed of the 
-*	robot, while a led connected to 3rd IR sensor 
-*	blinking.
+*  Trim Controlled Speed, Plus A Blinking LED
+*  This example is made for testing motor powering 
+*  circuit. The on board trim changes speed of the 
+*  robot, while a led connected to 3rd IR sensor 
+*  blinking.
 *
 */
 bool ledState=false;
