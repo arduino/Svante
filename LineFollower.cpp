@@ -11,12 +11,14 @@ void LineFollower::lineFollowCalibrate(int speed, int time){
 	doLineFollowCalibrate(-speed,speed,time);
 	stop();
 	
+	/*
 	for(int i=0;i<3;i++){
 		Serial.print(IRArray_Min[i]);
 		Serial.print(" ");
 		Serial.print(IRArray_Max[i]);
 		Serial.print(" | ");
 	}
+	*/
 }
 void LineFollower::doLineFollowCalibrate(int speedL,int speedR,int time){
 	go(speedL,speedR);
@@ -41,8 +43,11 @@ void LineFollower::lineFollowConfig(int KP,int KD, int intergrationTime, int rob
 void LineFollower::startLineFollow(){
 	int lastError=getLineFollowError();
 	int resLimit=500;//*KP/100.0;
-	int speedFactor=100;//robotSpeed*0.5;
+	int speedFactor=100;
 	while(true){
+		getIRArraryVals();
+		if(isEndLineReached());	
+		
 		int error=getLineFollowError();
 		
 		/*
@@ -79,11 +84,25 @@ void LineFollower::startLineFollow(){
 		
 	}
 }
-int LineFollower::getLineFollowError(){
-	int v[3];//left, middle, right
+void LineFollower::getIRArraryVals(){
 	for(int i=0;i<3;i++){
-		v[i]=map(getIRArray(i),IRArray_Min[i],IRArray_Max[i],0,255);
+		IRArray_vals[i]=map(getIRArray(i),IRArray_Min[i],IRArray_Max[i],0,255);
+		Serial.print(IRArray_vals[i]);
+		Serial.print(" ");
 	}
+	Serial.println();
+
+}
+bool LineFollower::isEndLineReached(){
+	for(int i=0;i<3;i++){
+		if(IRArray_vals[i]>ENDLINE_VALUE){
+			return false;
+		}
+	}
+	return true;
+}
+int LineFollower::getLineFollowError(){
+	int * v=IRArray_vals;//left, middle, right
 	int error=v[2]-v[0];
 	
 	if(error>0)

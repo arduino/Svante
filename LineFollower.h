@@ -1,5 +1,10 @@
 #ifndef LINEFOLLOWER_H
 #define LINEFOLLOWER_H
+
+#define ENDLINE_VALUE 10
+
+#define DEBUG 
+
 class LineFollower{
 	public:
 		void lineFollowConfig(int KP, int KD, int intergrationTime, int robotSpeed);
@@ -16,7 +21,10 @@ class LineFollower{
 		int robotSpeed;
 		int IRArray_Max[3];
 		int IRArray_Min[3];
+		int IRArray_vals[3];
 		
+		void getIRArraryVals();
+		bool isEndLineReached();
 		int getLineFollowError();
 		void doLineFollowCalibrate(int speedL,int speedR,int time);
 
