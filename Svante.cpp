@@ -26,7 +26,7 @@ void Svante::begin(int motorsDiff){
 void Svante::go(int speedLeft,int speedRight){
 	//Dirty and ugly hack so the robot can go back with a remote control
 	if(speedLeft==-100 && speedRight==-100){
-		motorsWrite(-100,-100);
+		motorsWrite(0,255,0,255);
 		return ;
 	}
 	//end of dirty and ugly hack, Yuks!
