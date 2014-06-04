@@ -3,6 +3,12 @@
 
 #include "LineFollower.h"
 
+#ifndef sbi
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#endif
+
+
+
 #define MOTOR_L1 10
 #define MOTOR_L2 9
 #define MOTOR_R1 5
@@ -64,5 +70,6 @@ class Svante : public LineFollower{
 };
 
 extern Svante robot;
-
+extern void stopMusic();
+extern void stopServo();
 #endif

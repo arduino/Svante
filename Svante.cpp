@@ -5,6 +5,17 @@
 Svante::Svante(){
 
 }
+extern void stopServo(){
+	sbi(TCCR1B, CS11);		// set timer 3 prescale factor to 64
+	sbi(TCCR1B, CS10);
+	sbi(TCCR1A, WGM10);		// put timer 3 in 8-bit phase correct pwm mode
+}
+extern void stopMusic(){
+	sbi(TCCR3B, CS31);		// set timer 3 prescale factor to 64
+	sbi(TCCR3B, CS30);
+	sbi(TCCR3A, WGM30);		// put timer 3 in 8-bit phase correct pwm mode
+}
+
 
 void Svante::begin(){
 	initMotors();
