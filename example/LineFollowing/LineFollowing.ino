@@ -1,5 +1,3 @@
-#include <Svante.h>
-#include <EEPROM.h>
 /*
 *
 *  Line following
@@ -9,7 +7,14 @@
 *  and turn it on. The robot will first calibrate
 *  itself, then start following the line.
 *
+*	This example is used together with Svante robot
+*	verkstad.cc 
+*	(c) 2014 Arduino Verkstad
+*
 */
+
+#include <Svante.h>
+#include <EEPROM.h>
 
 void setup(){
   robot.begin();

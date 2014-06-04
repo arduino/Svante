@@ -1,8 +1,3 @@
-#include <Svante.h>
-#include <IRremote.h>
-#include <IRremoteTools.h>
-#include <EEPROM.h>
-
 /*
 *
 *  Calibrate Motors
@@ -31,7 +26,15 @@
 *  blink, indicating the calibration is 
 *  finished.
 *
+*	This example is used together with Svante robot
+*	verkstad.cc 
+*	(c) 2014 Arduino Verkstad
+*
 */
+#include <Svante.h>
+#include <IRremote.h>
+#include <IRremoteTools.h>
+#include <EEPROM.h>
 
 const int RECV_PIN = DP9;
 int motorsSpeed=100;

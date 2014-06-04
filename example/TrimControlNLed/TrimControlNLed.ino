@@ -1,5 +1,3 @@
-#include <Svante.h>
-#include <EEPROM.h>
 /*
 *  Trim Controlled Speed, Plus A Blinking LED
 *  This example is made for testing motor powering 
@@ -7,7 +5,14 @@
 *  robot, while a led connected to 3rd IR sensor 
 *  blinking.
 *
+*	This example is used together with Svante robot
+*	verkstad.cc 
+*	(c) 2014 Arduino Verkstad
+*
 */
+
+#include <Svante.h>
+#include <EEPROM.h>
 bool ledState=false;
 
 void setup(){

@@ -1,11 +1,17 @@
-#include <Svante.h>
-#include <EEPROM.h>
 /*
+*
 *  MotorsTest
 *  Test if the motors are moving, in the right
 *  direction.
 *
+*	This example is used together with Svante robot
+*	verkstad.cc 
+*	(c) 2014 Arduino Verkstad
+*
 */
+#include <Svante.h>
+#include <EEPROM.h>
+
 
 void setup(){
   robot.begin();
