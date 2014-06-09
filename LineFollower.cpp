@@ -46,8 +46,10 @@ void LineFollower::startLineFollow(){
 	int speedFactor=100;
 	while(true){
 		getIRArraryVals();
-		if(isEndLineReached());	
-		
+		if(isEndLineReached()){
+			stop();
+			return;	//end of line reached, stop the robot
+		}
 		int error=getLineFollowError();
 		
 		/*
