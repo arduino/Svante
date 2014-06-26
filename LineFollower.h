@@ -3,7 +3,7 @@
 
 #define ENDLINE_VALUE 10
 
-#define DEBUG 
+//#define DEBUG 
 
 class LineFollower{
 	public:
